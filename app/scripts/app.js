@@ -8,7 +8,6 @@ define([
   'angular-animate',
   'angular-touch',
   'angular-messages',
-  'angular-ui-select',
   'includes' ],
 function (angular){
   'use strict';
@@ -23,9 +22,7 @@ function (angular){
    */
 
   return angular
-    .module('sharpeye', [
-      'sharpeye.search',
-      'sharpeye.content',
+    .module('huskytime', [
       /*angJSDeps*/
       'ngCookies',
       'ngMessages',
@@ -33,7 +30,6 @@ function (angular){
       'ngSanitize',
       'ui.router',
       'ngAnimate',
-      'ngTouch',
-      'ui.select'
+      'ngTouch'
     ]);
 });

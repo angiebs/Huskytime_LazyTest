@@ -10,14 +10,11 @@ require.config({
     'angular-touch' : '../../bower_components/angular-touch/angular-touch',
     'angular-mocks' : '../../bower_components/angular-mocks/angular-mocks',
     'angular-messages' : '../../bower_components/angular-messages/angular-messages',
-    'angular-google-maps' : '../../bower_components/angular-google-maps/dist/angular-google-maps',
-    'lodash' : '../../bower_components/lodash/dist/lodash',
+    'lodash' : '../../bower_components/lodash/lodash',
     'bootstrap' : '../../bower_components/bootstrap/dist/js/bootstrap',
     'jquery' : '../../bower_components/jquery/dist/jquery',
     'domReady' : '../../bower_components/domReady/domReady',
-    'text' : '../../bower_components/text/text',
-    'ionRangeSlider' : '../../bower_components/ion.rangeSlider/js/ion.rangeSlider.min',
-    'angular-ui-select': '../../bower_components/ui-select/dist/select.min'
+    'text' : '../../bower_components/text/text'
   },
   shim: {
     'angular' : {'exports' : 'angular', deps: ['jquery']},
@@ -29,9 +26,6 @@ require.config({
     'angular-touch': ['angular'],
     'angular-messages' : ['angular'],
     'bootstrap' : ['jquery'],
-    'ionRangeSlider' :  ['jquery'],
-    'angular-google-maps' : ['angular','lodash'],
-    'angular-ui-select' : ['angular'],
     'angular-mocks': {
       deps:['angular'],
       'exports':'angular.mock'
@@ -50,7 +44,7 @@ window.name = 'NG_DEFER_BOOTSTRAP!';
 require([
   'angular',
   'app',
-  'domReady!',
+  'domReady!'
 ],
 function(angular, app, domReady) {
   'use strict';
