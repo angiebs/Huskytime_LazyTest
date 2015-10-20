@@ -1,0 +1,376 @@
+<div class="se-canvas">
+  <ui-gmap-google-map center="map.center" zoom="map.zoom" dragging="map.dragging"
+          bounds="map.bounds" events="map.events" options="map.options"
+          pan="true" control="map.control">
+    <!--to add as a map control -->
+    <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+            events="searchbox.events" position="searchbox.position">
+    </ui-gmap-search-box>
+
+    <ui-gmap-markers idkey="map.markerId"
+            models="map.markers"
+            coords="'self'" icon="'icon'">
+    </ui-gmap-markers>
+
+    <ui-gmap-circle center='map.circle.center'
+                    radius='map.circle.radius'
+                    fill='map.circle.fill'
+                    stroke='map.circle.stroke'
+                    clickable='map.circle.clickable'
+                    draggable='map.circle.draggable'
+                    editable='map.circle.editable'
+                    visible='map.circle.visible'
+                    events='map.circle.events'
+                    control='map.circle.control'>
+    </ui-gmap-circle>
+  </ui-gmap-google-map>
+</div>
+
+<div class="container-fluid" id="main">
+  <div class="row">
+    <div class="col-md-4 se-column left" id="left">
+      <div class="clearfix se-message">
+        <i class="fa {{message.icon}}"> </i>
+        <span>{{message.value}}</span>
+      </div>
+      <ul class="nav nav-tabs" role="tablist" id="sharpEyeTabs">
+        <li role="presentation" class="active"><a href="#filter" aria-controls="filter" role="tab" data-toggle="tab" id="filterTab"><i class="fa fa-filter"></i> Filter</a></li>
+        <li role="presentation"><a href="#result" aria-controls="result" role="tab" data-toggle="tab" id="resultTab"><i class="fa fa-list-ul"></i> Result</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" id="settingsTab"><i class="fa fa-cog"></i> Settings</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="filter">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="well first">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <legend>Filter</legend>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Searching for</label>
+                      <div class="col-md-9">
+                        <ui-select multiple ng-model="filter.typeOfHouses" theme="select2" style="width: 100%">
+                          <ui-select-match placeholder="Select house...">{{$item}}</ui-select-match>
+                          <ui-select-choices repeat="typeHouse in idealista.typeOfHouses | filter:$select.search">
+                            {{ typeHouse }}
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Bedrooms</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="inputSearchRadio" ng-model="filter.bedrooms" data-ion-slider
+                        data-type="double"
+                        data-min="0"
+                        data-max="4"
+                        data-from="2"
+                        data-to="3"
+                        data-max-postfix="+">
+                      </div>
+                    <p>
+                      {{filter.bedrooms}}
+                    </p>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Bathrooms</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="inputSearchRadio" ng-model="filter.bathrooms"
+                        data-ion-slider
+                        data-type="double"
+                        data-min="0"
+                        data-max="3"
+                        data-from="0"
+                        data-to="1"
+                        data-max-postfix="+">
+                      </div>
+                      <p>
+                        {{filter.bathrooms}}
+                      </p>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Size</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="inputSearchRadio" ng-model="filter.size"
+                        data-ion-slider
+                        data-type="double"
+                        data-min="0"
+                        data-max="250"
+                        data-from="40"
+                        data-to="120"
+                        data-grid="true"
+                        data-grid-num="50"
+                        data-max-postfix="+">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Condition</label>
+                      <div class="col-md-9">
+                        <ui-select ng-model="filter.condition" theme="select2"  style="width: 100%;">
+                          <ui-select-match placeholder="Select conditions...">{{$select.selected}}</ui-select-match>
+                          <ui-select-choices repeat="condition in idealista.conditions | filter:$select.search">
+                            {{condition}}
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Extras</label>
+                      <div class="col-md-9">
+                        <ui-select multiple ng-model="filter.taxonomies" theme="select2" style="width: 100%;">
+                          <ui-select-match placeholder="Extra filters ...">{{$item}}</ui-select-match>
+                          <ui-select-choices repeat="extra in idealista.taxonomies | filter:$select.search">
+                            {{extra}}
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane result" id="result">
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 last">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 last">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-6 last">
+              <div class="catch">
+                <img src="images/sample.png" />
+                <div class="overlay">
+                  <div class="row">
+                    <div class="col-md-4">
+                      1000 EUR
+                    </div>
+                    <div class="col-md-4">
+                      11 EUR/m<sup>2</sup>
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      3 hab
+                    </div>
+                    <div class="col-md-4">
+                      1 wc
+                    </div>
+                    <div class="col-md-4">
+                      <i class="fa fa-link"></i>
+                      <!-- Poner iconos en funcion de las caracteristicas -->
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="well first">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <legend>Map</legend>
+                    <div class="form-group">
+                      <label for="inputSearchRadio" class="col-md-3 control-label">Search radio</label>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="inputSearchRadio"
+                        data-ion-slider
+                        data-ion-slider
+                        data-type="single"
+                        data-min="50"
+                        data-max="2500"
+                        data-from="500"
+                        data-grid="true"
+                        data-grid-num="5">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="" class="col-md-3 control-label" >Visible radar</label>
+                      <div class="col-md-9">
+                        <div class="onoffswitch">
+                          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                          <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner">
+                              <span class="onoffswitch-active"><span class="onoffswitch-switch">ON</span></span>
+                              <span class="onoffswitch-inactive"><span class="onoffswitch-switch">OFF</span></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>                    
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8" id="right">
+    </div>
+  </div>
+</div>
