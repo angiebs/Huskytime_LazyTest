@@ -23,6 +23,7 @@ function (angular){
 
   return angular
     .module('huskytime', [
+      'huskytime.commons',
       /*angJSDeps*/
       'ngCookies',
       'ngMessages',
