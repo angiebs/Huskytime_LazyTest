@@ -27,9 +27,12 @@ define([
 
         //Using a cookie to save selected language
         $translateProvider.useCookieStorage();
-
       }
     ]);
+
+    module.run(function($rootScope){
+      $rootScope.availableLocales = angular.copy(LocaleBundle.availableLocales);
+    });
 
     return module;
   });

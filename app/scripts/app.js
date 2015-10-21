@@ -7,10 +7,10 @@ function (angular){
   'use strict';
 
   /**
-   * @ngdoc Angular SharpEye Definition
-   * @name sharpeye
+   * @ngdoc Angular Huskytime Module
+   * @name huskytime
    * @description
-   * # sharpeye
+   * # huskytime
    *
    * Main module of the application.
    */
@@ -28,5 +28,7 @@ function (angular){
       /*husky dependencies*/
       'huskytime.commons',
       'huskytime.locale'
-    ]);
+    ]).config(function($logProvider){
+      $logProvider.debugEnabled(true);
+    });
 });
