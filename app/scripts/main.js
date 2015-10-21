@@ -16,7 +16,11 @@ require.config({
     'bootstrap' : '../../bower_components/bootstrap/dist/js/bootstrap',
     'jquery' : '../../bower_components/jquery/dist/jquery',
     'domReady' : '../../bower_components/domReady/domReady',
-    'text' : '../../bower_components/text/text'
+    'text' : '../../bower_components/text/text',
+    'js-data' : '../../bower_components/js-data/dist/js-data',
+    'js-data-localstorage' : '../../bower_components/js-data-localstorage/dist/js-data-localstorage',
+    'js-data-angular' : '../../bower_components/js-data-angular/dist/js-data-angular'
+
   },
   shim: {
     'angular' : {'exports' : 'angular', deps: ['jquery']},
@@ -30,6 +34,8 @@ require.config({
     'angular-translate' : ['angular'],
     'angular-translate-cookie' : ['angular-translate'],
     'bootstrap' : ['jquery'],
+    'js-data-localstorage' : ['js-data'],
+    'js-data-angular' : ['js-data-localstorage'],
     'angular-mocks': {
       deps:['angular'],
       'exports':'angular.mock'

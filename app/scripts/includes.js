@@ -11,7 +11,7 @@ define(
 
   //Husky Commons
   'commons/controllers/settings',
-  //'commons/provides/storage',
+  'commons/providers/locker',
 
   //Husky Locale
   'language/module'

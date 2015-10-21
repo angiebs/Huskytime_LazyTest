@@ -1,16 +1,10 @@
 define([
     'angular',
-    'text!settings.json',
-    'angular-ui-router'
+    'angular-ui-router',
+    'js-data-angular'
   ],
-  function (angular,Settings) {
+  function (angular) {
     'use strict';
-
-    if (!Settings){
-      throw '**NOTE** - You must provide a settings.json file';
-    }else {
-      Settings = JSON.parse(Settings);
-    }
 
     /**
      * @ngdoc Module Commons
@@ -19,12 +13,13 @@ define([
      * # Features related to the Google Map Interacion
      *
      */
-    var module = angular.module('huskytime.commons', ['ui.router']);
+    var module = angular.module('huskytime.commons', ['ui.router','js-data']);
 
-    //you can add config
+
     module.config([
       '$stateProvider',
-      function ($stateProvider) {
+      'DSProvider',
+      function ($stateProvider, DSProvider) {
 
         $stateProvider
           .state('settings', {

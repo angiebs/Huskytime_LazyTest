@@ -22,31 +22,31 @@ define([
     };
 
     ModuleManager.provider("TrelloApi", [ function() {
-        this.init = function (a) {
-          if (!Trello.key() && !a.key) {
+        this.init = function (myOptions) {
+          if (!Trello.key() && !myOptions.key) {
             throw new Error("You must specify your trello app key");
           }
-          Trello.setKey(a.key);
-          angular.extend(options, a);
+          Trello.setKey(myOptions.key);
+          angular.extend(options, myOptions);
         };
-        this.$get = ["$q", "$rootScope", "$timeout", function (a, b, c) {
-          var d = function () {
+        this.$get = ["$q", "$rootScope", "$timeout", function ($q, $rootScope, $timeout) {
+          var clazz = function () {
           };
-          var e = function (b, c, d) {
-            var e = a.defer();
-            Trello[b].get(c, d, function (a) {
-              e.resolve(a);
-            }, function (a) {
-              e.reject(a);
+          var trelloGet = function (command, id, params) {
+            var defer = $q.defer();
+            Trello[command].get(id, params, function (successBean) {
+              defer.resolve(successBean);
+            }, function (erroBean) {
+              defer.reject(erroBean);
             });
-            return e.promise;
+            return defer.promise;
           };
-          d.prototype.Authenticated = function () {
+          clazz.prototype.Authenticated = function () {
             return Trello.authorized();
           };
-          d.prototype.Authenticate = function (b) {
+          clazz.prototype.Authenticate = function (b) {
             b = b || {};
-            var c = a.defer();
+            var c = $q.defer();
             var d = angular.copy(options);
             if (b.interactive) {
               d.interactive = true;
@@ -61,40 +61,40 @@ define([
             }));
             return c.promise;
           };
-          d.prototype.Rest = function (b, c, d) {
-            var e = a.defer();
-            Trello.rest(b, c, d, function (a) {
-              e.resolve(a);
-            }, function (a) {
-              e.reject(a);
+          clazz.prototype.Rest = function (method, path, params) {
+            var defer = $q.defer();
+            Trello.rest(method, path, params, function (successBean) {
+              defer.resolve(successBean);
+            }, function (errorBean) {
+              defer.reject(errorBean);
             });
-            return e.promise;
+            return defer.promise;
           };
-          d.prototype.Token = function () {
+          clazz.prototype.Token = function () {
             return Trello.token();
           };
-          d.prototype.actions = function (a, b) {
-            return e("actions", a, b);
+          clazz.prototype.actions = function (id, params) {
+            return trelloGet("actions", id, params);
           };
-          d.prototype.boards = function (a, b) {
-            return e("boards", a, b);
+          clazz.prototype.boards = function (id, params) {
+            return trelloGet("boards", id, params);
           };
-          d.prototype.cards = function (a, b) {
-            return e("cards", a, b);
+          clazz.prototype.cards = function (id, params) {
+            return trelloGet("cards", id, params);
           };
-          d.prototype.checklists = function (a, b) {
-            return e("checklists", a, b);
+          clazz.prototype.checklists = function (id, params) {
+            return trelloGet("checklists", id, params);
           };
-          d.prototype.lists = function (a, b) {
-            return e("lists", a, b);
+          clazz.prototype.lists = function (id, params) {
+            return trelloGet("lists", id, params);
           };
-          d.prototype.members = function (a, b) {
-            return e("members", a, b);
+          clazz.prototype.members = function (id, params) {
+            return trelloGet("members", id, params);
           };
-          d.prototype.organizations = function (a, b) {
-            return e("organizations", a, b);
+          clazz.prototype.organizations = function (id, params) {
+            return trelloGet("organizations", id, params);
           };
-          return new d();
+          return new clazz();
         }];
       }]);
 
