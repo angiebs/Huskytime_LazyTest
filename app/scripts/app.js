@@ -1,13 +1,7 @@
 /*jshint unused: vars */
 define([
   'angular',
-  'angular-ui-router',
-  'angular-cookies',
-  'angular-sanitize',
-  'angular-resource',
-  'angular-animate',
-  'angular-touch',
-  'angular-messages',
+  'bootstrap',
   'includes' ],
 function (angular){
   'use strict';
@@ -23,7 +17,6 @@ function (angular){
 
   return angular
     .module('huskytime', [
-      'huskytime.commons',
       /*angJSDeps*/
       'ngCookies',
       'ngMessages',
@@ -31,6 +24,9 @@ function (angular){
       'ngSanitize',
       'ui.router',
       'ngAnimate',
-      'ngTouch'
+      'ngTouch',
+      /*husky dependencies*/
+      'huskytime.commons',
+      'huskytime.locale'
     ]);
 });

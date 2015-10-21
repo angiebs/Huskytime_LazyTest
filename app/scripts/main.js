@@ -10,6 +10,8 @@ require.config({
     'angular-touch' : '../../bower_components/angular-touch/angular-touch',
     'angular-mocks' : '../../bower_components/angular-mocks/angular-mocks',
     'angular-messages' : '../../bower_components/angular-messages/angular-messages',
+    'angular-translate' : '../../bower_components/angular-translate/angular-translate',
+    'angular-translate-cookie' : '../../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie',
     'lodash' : '../../bower_components/lodash/lodash',
     'bootstrap' : '../../bower_components/bootstrap/dist/js/bootstrap',
     'jquery' : '../../bower_components/jquery/dist/jquery',
@@ -25,6 +27,8 @@ require.config({
     'angular-animate': ['angular'],
     'angular-touch': ['angular'],
     'angular-messages' : ['angular'],
+    'angular-translate' : ['angular'],
+    'angular-translate-cookie' : ['angular-translate'],
     'bootstrap' : ['jquery'],
     'angular-mocks': {
       deps:['angular'],
