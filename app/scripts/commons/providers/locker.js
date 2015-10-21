@@ -30,8 +30,7 @@ define([
       });
     })
     .factory('Locker', function($q, DS, Preference){
-      var me = this,
-      extra = {},
+      var extra = {},
       clazz = function(){};
 
       /**
@@ -61,10 +60,28 @@ define([
           extra[attrs.id] =  attrs;
           return attrs;
         }else {
-          var optionsToApply = angular.extend({},{upsert:false},options);
-          return Preference.create(attrs,optionsToApply);
+          return Preference.create(attrs,options);
         }
       };
+
+      clazz.prototype.setValue = function(id, value, options){
+        var obj = {
+          id : id,
+          value : value
+        };
+
+        return Preference.create(obj,options)
+      };
+
+
+      clazz.prototype.getValue = function(id, defaultValue){
+        var result = Preference.get(id) || defaultValue;
+        if (result){
+          result = result.value;
+        }
+        return result;
+      };
+
 
       return new clazz();
 
