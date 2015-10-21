@@ -26,7 +26,9 @@
     "js-data" : "^2.6.0",
     "js-data-localstorage" : "^2.1.1",
     "js-data-http": "^2.1.1",
-    "js-data-angular" : "^3.1.0"
+    "js-data-angular" : "^3.1.0",
+    "ng-busy" : "^0.2.0"
+
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

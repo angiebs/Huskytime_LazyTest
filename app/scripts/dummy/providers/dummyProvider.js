@@ -6,13 +6,11 @@ define([
   function (angular,$, ModuleManager) {
     'use strict';
 
-    ModuleManager.controller('DummyController',
+    ModuleManager.provider('DummyProvider',
       [
-        '$scope',
         '$log',
-        '$timeout',
-        function ($scope,$log, $timeout) {
-          //Your Magic here
+        function ($log) {
+          //Your magic here
 
         }
       ]
