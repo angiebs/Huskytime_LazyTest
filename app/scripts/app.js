@@ -25,7 +25,9 @@ function (angular){
       'ui.router',
       'ngAnimate',
       'ngTouch',
+      'ngBusy',
       /*husky dependencies*/
+
       'huskytime.commons',
       'huskytime.locale'
     ]).config(function($logProvider){

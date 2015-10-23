@@ -8,6 +8,7 @@ define(
   'angular-animate',
   'angular-touch',
   'angular-messages',
+  'ng-busy',
 
   //Husky Commons
   'commons/controllers/settings',

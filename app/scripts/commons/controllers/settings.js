@@ -47,6 +47,15 @@ function (angular,ModuleManager) {
           $translate.use(me.pref.locale);
         }
 
+        //JUST FOR TESTING PURPOSES
+
+        me.testBusy = function(config) {
+          // simulate the busy event calls normally provided by the http interceptor provided with this module
+          $scope.$broadcast('busy.begin', config);
+          $timeout(function() {
+            $scope.$broadcast('busy.end', config);
+          }, 1000);
+        };
       }
     ]
   );
