@@ -26,6 +26,7 @@ function (angular){
       'ngAnimate',
       'ngTouch',
       'ngBusy',
+      'angular-growl',
       /*husky dependencies*/
 
       'huskytime.commons',

@@ -9,6 +9,7 @@ define(
   'angular-touch',
   'angular-messages',
   'ng-busy',
+  'angular-growl',
 
   //Husky Commons
   'commons/controllers/settings',

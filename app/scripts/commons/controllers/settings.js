@@ -11,9 +11,14 @@ function (angular,ModuleManager) {
       '$log',
       '$timeout',
       '$translate',
+      'growl',
       'Locker',
       'Static',
-      function ($scope, $log, $timeout, $translate, Locker, Static) {
+      function ($scope, $log, $timeout, $translate, growl, Locker, Static) {
+        growl.warning("This adds a warn message");
+        growl.info("This adds a info message");
+        growl.success("This adds a success message");
+        growl.error("This adds a error message");
        //Variable Initialization
         var me = $scope; //Im the scope
 
