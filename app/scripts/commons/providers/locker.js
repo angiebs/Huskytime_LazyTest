@@ -64,6 +64,10 @@ define([
         }
       };
 
+      clazz.prototype.remove = function(id){
+        return Preference.destroy(id);
+      };
+
       clazz.prototype.setValue = function(id, value, options){
         var obj = {
           id : id,

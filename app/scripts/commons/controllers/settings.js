@@ -12,23 +12,35 @@ function (angular,ModuleManager) {
       '$timeout',
       '$translate',
       'Locker',
-      function ($scope, $log, $timeout, $translate, Locker) {
+      'Static',
+      function ($scope, $log, $timeout, $translate, Locker, Static) {
        //Variable Initialization
         var me = $scope; //Im the scope
 
         me.pref = {
-          locale : Locker.getValue('locale',$translate.use()),
-          applicationKey : Locker.getValue('applicationKey',''),
-          secretKey : Locker.getValue('secretKey','')
+          locale : Locker.getValue(Static.PREFERENCE_LOCALE,$translate.use()),
+          applicationKey : Locker.getValue(Static.PREFERENCE_TRELLO_APPLICATION_KEY,''),
+          secretKey : Locker.getValue(Static.PREFERENCE_TRELLO_SECRET_KEY,'')
         };
 
         me.save = function() {
           $log.debug('Saving preferences in localstorage', me.pref);
 
-          Locker.setValue('locale',me.pref.locale);
-          Locker.setValue('applicationKey',me.pref.applicationKey);
-          Locker.setValue('secretKey',me.pref.secretKey);
+          Locker.setValue(Static.PREFERENCE_LOCALE,me.pref.locale);
+          Locker.setValue(Static.PREFERENCE_TRELLO_APPLICATION_KEY,me.pref.applicationKey);
+          Locker.setValue(Static.PREFERENCE_TRELLO_SECRET_KEY,me.pref.secretKey);
 
+        };
+
+        me.reset = function(){
+          Locker.remove(Static.PREFERENCE_LOCALE);
+          Locker.remove(Static.PREFERENCE_TRELLO_APPLICATION_KEY);
+          Locker.remove(Static.PREFERENCE_TRELLO_SECRET_KEY);
+          me.pref = {
+            locale : $translate.use(),
+            applicationKey : '',
+            secretKey : ''
+          }
         };
 
         me.setLanguage = function(){
