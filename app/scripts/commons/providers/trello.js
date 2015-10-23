@@ -10,7 +10,7 @@ define([
     var options = {
       key: null,
       type: "popup",
-      name: null,
+      name: "HuskyTime",
       persist: true,
       interactive: true,
       scope: {
@@ -18,17 +18,10 @@ define([
         write: false,
         account: false
       },
-      expiration: "never"
+      expiration: "1hour"
     };
 
     ModuleManager.provider("TrelloApi", [ function() {
-        this.init = function (myOptions) {
-          if (!Trello.key() && !myOptions.key) {
-            throw new Error("You must specify your trello app key");
-          }
-          Trello.setKey(myOptions.key);
-          angular.extend(options, myOptions);
-        };
         this.$get = ["$q", "$rootScope", "$timeout", function ($q, $rootScope, $timeout) {
           var clazz = function () {
           };
@@ -41,25 +34,36 @@ define([
             });
             return defer.promise;
           };
+
           clazz.prototype.Authenticated = function () {
             return Trello.authorized();
           };
-          clazz.prototype.Authenticate = function (b) {
-            b = b || {};
-            var c = $q.defer();
-            var d = angular.copy(options);
-            if (b.interactive) {
-              d.interactive = true;
+          clazz.prototype.Authenticate = function (key) {
+            if (!key) {
+              throw new Error("You must specify your trello app key");
+            }else if (window.Trello) {
+              //reload the page
+              location.reload();
             }
-            Trello.authorize(angular.extend(d, {
-              success: function () {
-                c.resolve();
-              },
-              error: function () {
-                c.reject();
-              }
-            }));
-            return c.promise;
+
+            var myOptions = angular.copy(options),
+            defered = $q.defer();
+            require(['https://api.trello.com/1/client.js?key=' + key], function (TrelloClient) {
+              Trello.setKey(key);
+              Trello.authorize(angular.extend(myOptions, {
+                success: function () {
+                  defered.resolve(TrelloClient);
+                },
+                error: function () {
+                  defered.reject();
+                }
+              }));
+            }, function(){
+              defered.reject();
+            });
+
+
+            return defered.promise;
           };
           clazz.prototype.Rest = function (method, path, params) {
             var defer = $q.defer();
@@ -75,6 +79,9 @@ define([
           };
           clazz.prototype.actions = function (id, params) {
             return trelloGet("actions", id, params);
+          };
+          clazz.prototype.myBoards = function(){
+            return this.Rest('GET','member/me/boards');
           };
           clazz.prototype.boards = function (id, params) {
             return trelloGet("boards", id, params);
@@ -97,15 +104,6 @@ define([
           return new clazz();
         }];
       }]);
-
-    ModuleManager.run([ function() {
-      var trelloClient = document.createElement("script");
-      trelloClient.type = "text/javascript";
-      trelloClient.async = true;
-      trelloClient.src = "https://api.trello.com/1/client.js?key=" + options.key;
-      var b = document.getElementsByTagName("script")[0];
-      b.parentNode.insertBefore(trelloClient, b);
-    } ]);
 
     return ModuleManager;
   });

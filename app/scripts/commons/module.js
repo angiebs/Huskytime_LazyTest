@@ -29,5 +29,12 @@ define([
           });
       }]);
 
+    module.run(function($rootScope){
+      //Want to provide some global functions
+
+
+
+    });
+
     return module;
   });
