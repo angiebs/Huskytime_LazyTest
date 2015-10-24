@@ -12,8 +12,12 @@ define([
         '$log',
         '$timeout',
         'TrelloApi',
-        function ($scope,$log, $timeout, TrelloApi) {
-          //Your Magic here
+        'Locker',
+        'Static',
+        function ($scope,$log, $timeout, TrelloApi, Locker, Static) {
+          var me = $scope;
+
+          me.lists = Locker.getValue(Static.SELECTED_LISTS, []);
 
         }
       ]

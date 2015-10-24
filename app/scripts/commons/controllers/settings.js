@@ -34,13 +34,13 @@ function (angular,ModuleManager) {
               //  growl.error("Oops! Taco went for a walk! try to refresh the page");
               //});
           } else {
-            growl.error("Oops! application key not looking good to me");
+            growl.error("Oops! Please provide an application key");
           }
         }
 
         me.pref = {
-          locale : Locker.getValue(Static.PREFERENCE_LOCALE,$translate.use()),
-          applicationKey : Locker.getValue(Static.PREFERENCE_TRELLO_APPLICATION_KEY,''),
+          locale : Locker.getValue(Static.LOCALE,$translate.use()),
+          applicationKey : Locker.getValue(Static.TRELLO_APPLICATION_KEY,''),
         };
 
 
@@ -48,15 +48,15 @@ function (angular,ModuleManager) {
         me.save = function() {
           $log.debug('Saving preferences in localstorage', me.pref);
 
-          Locker.setValue(Static.PREFERENCE_LOCALE,me.pref.locale);
-          Locker.setValue(Static.PREFERENCE_TRELLO_APPLICATION_KEY,me.pref.applicationKey);
+          Locker.setValue(Static.LOCALE,me.pref.locale);
+          Locker.setValue(Static.TRELLO_APPLICATION_KEY,me.pref.applicationKey);
 
           _loadTrello();
         };
 
         me.reset = function(){
-          Locker.remove(Static.PREFERENCE_LOCALE);
-          Locker.remove(Static.PREFERENCE_TRELLO_APPLICATION_KEY);
+          Locker.remove(Static.LOCALE);
+          Locker.remove(Static.TRELLO_APPLICATION_KEY);
           me.pref = {
             locale : $translate.use(),
             applicationKey : '',

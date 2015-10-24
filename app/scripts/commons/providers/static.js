@@ -6,9 +6,12 @@ define([
     'use strict';
 
     return ModuleManager.constant('Static',{
-      PREFERENCE_LOCALE : 'locale',
-      PREFERENCE_TRELLO_APPLICATION_KEY : 'applicationKey',
-      PREFERENCE_TRELLO_SECRET_KEY : 'secretKey'
+      LOCALE : 'locale',
+      TRELLO_APPLICATION_KEY : 'applicationKey',
+
+      SELECTED_LISTS : 'lists'
+
+
 
 
 

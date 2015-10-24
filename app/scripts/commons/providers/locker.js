@@ -79,7 +79,7 @@ define([
 
 
       clazz.prototype.getValue = function(id, defaultValue){
-        var result = Preference.get(id) || defaultValue;
+        var result = Preference.get(id) || { value : defaultValue};
         if (result){
           result = result.value;
         }
