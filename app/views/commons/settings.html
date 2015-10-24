@@ -10,10 +10,6 @@
     <div class="row">
       <div class="col-lg-12" >
         <div class="form-group">
-          <label class="control-label" for="applicationKey" data-translate="TRELLO_APPLICATION_KEY">Application Key</label> (<a href="https://trello.com/app-key" target="_blank">Get your key</a>)
-          <input class="form-control" id="applicationKey" type="text" ng-model="pref.applicationKey" placeholder="bc123bc052ea312624ce0c1a61230ad2" >
-        </div>
-        <div class="form-group">
           <label for="language" class="control-label" data-translate="LANGUAGE">Language</label>
           <select class="form-control" id="language"
                   ng-model="pref.locale"
@@ -21,6 +17,23 @@
                   ng-change="setLanguage()" >
           </select>
         </div>
+        <div class="form-group">
+          <label class="control-label" for="applicationKey" data-translate="TRELLO_APPLICATION_KEY">Application Key</label> (<a href="https://trello.com/app-key" target="_blank">Get your key</a>)
+          <input class="form-control" id="applicationKey" type="text" ng-model="pref.applicationKey" placeholder="bc123bc052ea312624ce0c1a61230ad2" >
+        </div>
+        <div class="form-group" ng-if="boards.length > 0">
+          <label class="control-label" for="boards" data-translate="TRELLO_BOARDS">Boards</label>
+          <ui-select class="form-control" id="boards" multiple ng-model="pref.boards"  >
+            <ui-select-match placeholder="Choose board...">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="board in boards | propsFilter: {name: $select.search}">
+              <div ng-bind-html="board.name | highlight: $select.search"></div>
+              <small>
+                id: {{board.id}}
+              </small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
         <div class="form-group">
           <div class="col-lg-12">
             <button type="submit" class="btn btn-primary" data-translate="SAVE" ng-click="save()">Save</button>

@@ -24,15 +24,23 @@ function (angular,ModuleManager) {
           //Testing if key is a 32 characters hexadecimal
           if (me.pref.applicationKey !== '' &&  /[0-9a-fA-F]{32}?/.test(me.pref.applicationKey)){
             $log.debug("trying to load and authenticate with trello client.js");
-              //TrelloApi.Authenticate(me.pref.applicationKey).then(function(){
-              //  //change view
-              //  $log.debug("im in");
-              //  TrelloApi.myBoards().then(function(success){
-              //    $log.debug('boards?', success);
-              //  })
-              //},function(){
-              //  growl.error("Oops! Taco went for a walk! try to refresh the page");
-              //});
+              TrelloApi.Authenticate(me.pref.applicationKey).then(function(){
+                //change view
+                $log.debug("im in my trello account");
+                TrelloApi.myBoards().then(function(myTrelloBoards){
+                  me.boards = myTrelloBoards;
+                },function(){
+                  growl.error('Opps! Trello Token has expired', {
+                    onclose : function(){
+                      TrelloApi.Deauthorize();
+                      location.reload();
+                    }
+                  })
+
+                })
+              },function(){
+                growl.error("Oops! Taco went for a walk! try to refresh the page");
+              });
           } else {
             growl.error("Oops! Please provide an application key");
           }
@@ -41,7 +49,9 @@ function (angular,ModuleManager) {
         me.pref = {
           locale : Locker.getValue(Static.LOCALE,$translate.use()),
           applicationKey : Locker.getValue(Static.TRELLO_APPLICATION_KEY,''),
+          boards : []
         };
+        me.boards = [];
 
 
 

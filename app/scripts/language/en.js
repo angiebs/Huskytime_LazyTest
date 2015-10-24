@@ -9,9 +9,8 @@ define(
       'SAVE' : 'Save',
       'LANGUAGE' : 'Language',
       'TRELLO_APPLICATION_KEY' : 'Application Key',
+      'TRELLO_BOARDS' : 'Boards',
       'BUSY' : 'Loading'
-
-
     };
 
     return translations;

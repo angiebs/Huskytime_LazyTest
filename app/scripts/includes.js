@@ -18,6 +18,7 @@ define(
   'commons/providers/locker',
   'commons/providers/static',
   'commons/providers/trello',
+  'commons/providers/utils',
 
   //Husky Locale
   'language/module'

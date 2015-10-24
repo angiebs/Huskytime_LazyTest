@@ -18,11 +18,11 @@ define([
         write: false,
         account: false
       },
-      expiration: "1hour"
+      expiration: "never"
     };
 
     ModuleManager.provider("TrelloApi", [ function() {
-        this.$get = ["$q", "$rootScope", "$timeout", function ($q, $rootScope, $timeout) {
+        this.$get = ["$q", "$log", function ($q, $log) {
           var clazz = function () {
           };
           var trelloGet = function (command, id, params) {
@@ -46,10 +46,13 @@ define([
               location.reload();
             }
 
+            options.key = key;
             var myOptions = angular.copy(options),
             defered = $q.defer();
             require(['https://api.trello.com/1/client.js?key=' + key], function (TrelloClient) {
+              $log.debug('Received Trello Client');
               Trello.setKey(key);
+              $log.debug('Trying authorization ...',myOptions);
               Trello.authorize(angular.extend(myOptions, {
                 success: function () {
                   defered.resolve(TrelloClient);
@@ -65,6 +68,10 @@ define([
 
             return defered.promise;
           };
+          clazz.prototype.Deauthorize = function(){
+            $log.debug('Cleaning Trello token');
+            Trello.deauthorize();
+          }
           clazz.prototype.Rest = function (method, path, params) {
             var defer = $q.defer();
             Trello.rest(method, path, params, function (successBean) {
@@ -107,3 +114,6 @@ define([
 
     return ModuleManager;
   });
+
+
+
