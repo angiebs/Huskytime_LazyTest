@@ -1,7 +1,8 @@
 define([
     'angular',
     'angular-ui-router',
-    'js-data-angular'
+    'js-data-angular',
+    'datatables',
   ],
   function (angular) {
     'use strict';
@@ -14,7 +15,6 @@ define([
      *
      */
     var module = angular.module('huskytime.commons', ['ui.router','js-data']);
-
 
     module.config([
       '$stateProvider',

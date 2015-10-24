@@ -21,7 +21,15 @@ require.config({
     'text' : '../../bower_components/text/text',
     'js-data' : '../../bower_components/js-data/dist/js-data',
     'js-data-localstorage' : '../../bower_components/js-data-localstorage/dist/js-data-localstorage',
-    'js-data-angular' : '../../bower_components/js-data-angular/dist/js-data-angular'
+    'js-data-angular' : '../../bower_components/js-data-angular/dist/js-data-angular',
+    'datatables' : '../../bower_components/datatables/media/js/jquery.dataTables.min',
+    'datatables-bootstrap' : '../../bower_components/datatables/media/js/dataTables.bootstrap.min',
+    'datatables-buttons' : '../../bower_components/datatables-buttons/js/dataTables.buttons',
+    'datatables-buttons-html5' : '../../bower_components/datatables-buttons/js/buttons.html5',
+    'datatables-buttons-colVis' : '../../bower_components/datatables-buttons/js/buttons.colVis',
+    'datatables-buttons-bootstrap' : '../../bower_components/datatables-buttons/js/buttons.bootstrap',
+    'datatables-responsive' : '../../bower_components/datatables-responsive/js/dataTables.responsive',
+    'datatables-colreorder' : '../../bower_components/datatables-colreorder/js/dataTables.colReorder'
 
   },
   shim: {
@@ -40,6 +48,23 @@ require.config({
     'bootstrap' : ['jquery'],
     'js-data-localstorage' : ['js-data'],
     'js-data-angular' : ['js-data-localstorage'],
+    'datatables' : ['jquery'],
+    'datatables-bootstrap' : ['datatables', 'bootstrap'],
+    'datatables-buttons' : ['datatables-bootstrap'],
+    'datatables-responsive' : ['datatables-bootstrap'],
+    'datatables-colreorder' : ['datatables-bootstrap'],
+    'datatables-buttons-html5' : ['datatables-buttons'],
+    'datatables-buttons-colVis' : ['datatables-buttons'],
+    'datatables-buttons-bootstrap' : ['datatables-buttons'],
+    'datatables-custom' : [
+      'datatables-bootstrap',
+      'datatables-buttons',
+      'datatables-buttons-html5',
+      'datatables-buttons-colVis',
+      'datatables-buttons-bootstrap',
+      'datatables-responsive',
+      'datatables-colreorder'
+    ],
     'angular-mocks': {
       deps:['angular'],
       'exports':'angular.mock'
