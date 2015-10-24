@@ -3,6 +3,7 @@ define([
     'angular-ui-router',
     'js-data-angular',
     'datatables',
+    'ui-select',
   ],
   function (angular) {
     'use strict';
@@ -14,7 +15,7 @@ define([
      * # Features related to the Google Map Interacion
      *
      */
-    var module = angular.module('huskytime.commons', ['ui.router','js-data']);
+    var module = angular.module('huskytime.commons', ['ui.router','js-data','ui.select']);
 
     module.config([
       '$stateProvider',

@@ -29,7 +29,8 @@ require.config({
     'datatables-buttons-colVis' : '../../bower_components/datatables-buttons/js/buttons.colVis',
     'datatables-buttons-bootstrap' : '../../bower_components/datatables-buttons/js/buttons.bootstrap',
     'datatables-responsive' : '../../bower_components/datatables-responsive/js/dataTables.responsive',
-    'datatables-colreorder' : '../../bower_components/datatables-colreorder/js/dataTables.colReorder'
+    'datatables-colreorder' : '../../bower_components/datatables-colreorder/js/dataTables.colReorder',
+    'ui-select' : '../../bower_components/ui-select/dist/select.min'
 
   },
   shim: {
@@ -65,6 +66,7 @@ require.config({
       'datatables-responsive',
       'datatables-colreorder'
     ],
+    'ui-select' : ['angular'],
     'angular-mocks': {
       deps:['angular'],
       'exports':'angular.mock'
