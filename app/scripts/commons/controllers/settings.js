@@ -24,15 +24,15 @@ function (angular,ModuleManager) {
           //Testing if key is a 32 characters hexadecimal
           if (me.pref.applicationKey !== '' &&  /[0-9a-fA-F]{32}?/.test(me.pref.applicationKey)){
             $log.debug("trying to load and authenticate with trello client.js");
-              TrelloApi.Authenticate(me.pref.applicationKey).then(function(){
-                //change view
-                $log.debug("im in");
-                TrelloApi.myBoards().then(function(success){
-                  $log.debug('boards?', success);
-                })
-              },function(){
-                growl.error("Oops! Taco went for a walk! try to refresh the page");
-              });
+              //TrelloApi.Authenticate(me.pref.applicationKey).then(function(){
+              //  //change view
+              //  $log.debug("im in");
+              //  TrelloApi.myBoards().then(function(success){
+              //    $log.debug('boards?', success);
+              //  })
+              //},function(){
+              //  growl.error("Oops! Taco went for a walk! try to refresh the page");
+              //});
           } else {
             growl.error("Oops! application key not looking good to me");
           }

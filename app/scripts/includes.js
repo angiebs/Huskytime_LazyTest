@@ -13,6 +13,7 @@ define(
 
   //Husky Commons
   'commons/controllers/settings',
+  'commons/controllers/reports',
   'commons/providers/locker',
   'commons/providers/static',
   'commons/providers/trello',
