@@ -29,7 +29,7 @@ define([
         }
       });
     })
-    .factory('Locker', function($q, DS, Preference){
+    .factory('Locker', function($q, $log, DS, Preference){
       var extra = {},
       clazz = function(){};
 
@@ -74,6 +74,7 @@ define([
           value : value
         };
 
+        $log.debug("Saving in locker", id, value);
         return Preference.create(obj,options)
       };
 
@@ -83,6 +84,7 @@ define([
         if (result){
           result = result.value;
         }
+        $log.debug('Get value ', id, result);
         return result;
       };
 
