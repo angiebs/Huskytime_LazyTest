@@ -25,7 +25,7 @@ function (angular){
       'ui.router',
       'ngAnimate',
       'ngTouch',
-      'ngBusy',
+      'cgBusy',
       'angular-growl',
       /*husky dependencies*/
 

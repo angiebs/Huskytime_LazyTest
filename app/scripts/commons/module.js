@@ -3,7 +3,7 @@ define([
     'angular-ui-router',
     'js-data-angular',
     'datatables',
-    'ui-select',
+    'ui-select'
   ],
   function (angular) {
     'use strict';

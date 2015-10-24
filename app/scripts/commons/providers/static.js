@@ -8,12 +8,7 @@ define([
     return ModuleManager.constant('Static',{
       LOCALE : 'locale',
       TRELLO_APPLICATION_KEY : 'applicationKey',
-
-      SELECTED_LISTS : 'lists'
-
-
-
-
-
+      SELECTED_LISTS : 'lists',
+      EVENT_BUSY : 'EventBusy'
     });
   });

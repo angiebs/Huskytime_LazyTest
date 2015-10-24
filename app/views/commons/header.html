@@ -14,6 +14,10 @@
     <ul class="nav navbar-nav">
       <li ui-sref-active="active" class="active"><a ui-sref="root.reports" data-translate="REPORTS">Reports</a></li>
       <li ui-sref-active="active"><a ui-sref="root.settings" data-translate="SETTINGS">Settings</a></li>
+      <li>
+        <a ng-click="runTestBusy()">TEST BUSY</a>
+      </li>
+      <li cg-busy="myBusy"></li>
     </ul>
   </div>
 </div>

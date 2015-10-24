@@ -9,6 +9,7 @@ define(
       'SAVE' : 'Save',
       'LANGUAGE' : 'Language',
       'TRELLO_APPLICATION_KEY' : 'Application Key',
+      'BUSY' : 'Loading'
 
 
     };

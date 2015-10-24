@@ -8,7 +8,7 @@ define(
   'angular-animate',
   'angular-touch',
   'angular-messages',
-  'ng-busy',
+  'angular-busy',
   'angular-growl',
 
   //Husky Commons

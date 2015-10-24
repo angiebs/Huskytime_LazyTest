@@ -67,18 +67,6 @@ function (angular,ModuleManager) {
           $translate.use(me.pref.locale);
         };
 
-        //JUST FOR TESTING PURPOSES
-
-        me.testBusy = function(config) {
-          // simulate the busy event calls normally provided by the http interceptor provided with this module
-          var reconfig = angular.extend({},{remaining:0}, config);
-
-          $scope.$broadcast('busy.begin', reconfig);
-          $timeout(function() {
-            $scope.$broadcast('busy.end', reconfig);
-          }, 1000);
-        };
-
         $scope.$on('$viewContentLoaded', function(){
           _loadTrello();
         });

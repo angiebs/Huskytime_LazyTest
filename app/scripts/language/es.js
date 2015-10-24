@@ -9,7 +9,7 @@ define(
       'SAVE' : 'Guardar',
       'LANGUAGE' : 'Idioma',
       'TRELLO_APPLICATION_KEY' : 'Application Key',
-      'TRELLO_SECRET_KEY' : 'Secret Key'
+      'BUSY' : 'Cargando'
 
     };
 
