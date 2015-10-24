@@ -29,28 +29,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-          <a class="navbar-brand" href="#/">Husky <i class="fa fa-trello"> </i> Time</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="js-navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a ui-sref="reports" data-translate="REPORTS">Reports</a></li>
-            <li><a ui-sref="settings" data-translate="SETTINGS">Settings</a></li>
-          </ul>
-        </div>
+    <header>
+      <div ui-view="header"></div>
+    </header>
+    <div ui-view="container">
     </div>
 
-    <div ui-view ></div>
     <div growl></div>
 
     <script src="bower_components/requirejs/require.js" data-main="scripts/main.js"></script>

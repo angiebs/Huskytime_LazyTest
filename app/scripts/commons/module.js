@@ -24,17 +24,34 @@ define([
       function ($stateProvider, $urlRouterProvider, DSProvider) {
         $urlRouterProvider.otherwise('/reports');
 
-
         $stateProvider
-          .state('settings', {
-            url: '/settings',
-            templateUrl: 'views/commons/settings.html',
-            controller: 'SettingsController'
+          .state('root',{
+            url: '',
+            abstract: true,
+            views: {
+              'header': {
+                templateUrl: 'views/commons/header.html',
+                controller: 'HeaderController'
+              }
+            }
           })
-          .state('reports', {
+          .state('root.settings', {
+            url: '/settings',
+            views: {
+              'container@': {
+                templateUrl: 'views/commons/settings.html',
+                controller: 'SettingsController'
+              }
+            }
+          })
+          .state('root.reports', {
             url: '/reports',
-            templateUrl: 'views/commons/reports.html',
-            controller: 'ReportsController'
+            views: {
+              'container@': {
+                templateUrl: 'views/commons/reports.html',
+                controller: 'ReportsController'
+              }
+            }
           });
       }]);
 
