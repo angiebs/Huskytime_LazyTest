@@ -49,9 +49,35 @@ function (angular,ModuleManager) {
         me.pref = {
           locale : Locker.getValue(Static.LOCALE,$translate.use()),
           applicationKey : Locker.getValue(Static.TRELLO_APPLICATION_KEY,''),
-          boards : []
+          boards : [],
+          lists : []
         };
         me.boards = [];
+        me.lists = [];
+
+        function _addToList(destinationList, sourceList){
+          var ix = 0, ixLength = sourceList.length;
+          for(ix = 0; ix < ixLength; ix++){
+            destinationList.push(sourceList[ix]);
+          }
+
+          return destinationList;
+        }
+
+        me.onSelectBoard = function($item){
+          $log.debug('Selected board ' + $item.name);
+
+          TrelloApi.boardLists($item.id).then(function(successLists){
+            $log.debug('founded lists for ' + $item.name,successLists);
+            _addToList(me.lists,successLists);
+          }, function(error){
+            growl.error('Taco can not find lists on ' + $item.name);
+          })
+        };
+
+        me.onRemoveBoard = function($item, $model){
+
+        };
 
 
 

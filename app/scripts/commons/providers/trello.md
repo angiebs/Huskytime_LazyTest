@@ -74,3 +74,14 @@ Trello Board Response
     }
 ]
 ```
+
+
+Trello List Response
+
+
+closed: false
+id: "532307aedcedb45e7f3df7af"
+idBoard: "532307aedcedb45e7f3df7ad"
+name: "Doing"
+pos: 32768
+subscribed: false

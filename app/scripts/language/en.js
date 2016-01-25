@@ -10,6 +10,7 @@ define(
       'LANGUAGE' : 'Language',
       'TRELLO_APPLICATION_KEY' : 'Application Key',
       'TRELLO_BOARDS' : 'Boards',
+      'TRELLO_LISTS' : 'Lists',
       'BUSY' : 'Loading'
     };
 

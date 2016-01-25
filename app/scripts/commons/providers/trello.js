@@ -90,6 +90,9 @@ define([
           clazz.prototype.myBoards = function(){
             return this.Rest('GET','member/me/boards');
           };
+          clazz.prototype.boardLists = function(boardId){
+            return this.Rest('GET','boards/'+boardId+'/lists');
+          };
           clazz.prototype.boards = function (id, params) {
             return trelloGet("boards", id, params);
           };

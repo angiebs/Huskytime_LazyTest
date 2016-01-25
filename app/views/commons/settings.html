@@ -21,10 +21,11 @@
           <label class="control-label" for="applicationKey" data-translate="TRELLO_APPLICATION_KEY">Application Key</label> (<a href="https://trello.com/app-key" target="_blank">Get your key</a>)
           <input class="form-control" id="applicationKey" type="text" ng-model="pref.applicationKey" placeholder="bc123bc052ea312624ce0c1a61230ad2" >
         </div>
+        <!-- BOARDS -->
         <div class="form-group" ng-if="boards.length > 0">
           <label class="control-label" for="boards" data-translate="TRELLO_BOARDS">Boards</label>
-          <ui-select class="form-control" id="boards" multiple ng-model="pref.boards"  >
-            <ui-select-match placeholder="Choose board...">{{$item.name}}</ui-select-match>
+          <ui-select class="form-control" id="boards" multiple ng-model="pref.boards" on-select="onSelectBoard($item)" >
+            <ui-select-match placeholder="Choose board ...">{{$item.name}}</ui-select-match>
             <ui-select-choices repeat="board in boards | propsFilter: {name: $select.search}">
               <div ng-bind-html="board.name | highlight: $select.search"></div>
               <small>
@@ -33,6 +34,22 @@
             </ui-select-choices>
           </ui-select>
         </div>
+        <!-- END BOARDS -->
+
+        <!-- LISTS -->
+        <div class="form-group" ng-if="lists.length > 0">
+          <label class="control-label" for="lists" data-translate="TRELLO_LISTS">Lists</label>
+          <ui-select class="form-control" id="lists" multiple ng-model="pref.lists"  >
+            <ui-select-match placeholder="Choose lists ...">{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="list in lists | propsFilter: {name: $select.search}">
+              <div ng-bind-html="list.name | highlight: $select.search"></div>
+              <small>
+                id: {{list.id}}
+              </small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+        <!-- END LISTS -->
 
         <div class="form-group">
           <div class="col-lg-12">
